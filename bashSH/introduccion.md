@@ -17,3 +17,5 @@ Tenemos que tener en cuenta la shell que estamos usando para poder crear el scri
 ## Es un conjunto de reglas y estandares para garantizar la interportabilidad entre sistemas unix, esta evoluciono a:
 ### **Single Unix Specification (SUS)**
 Todos los sitemas linux cumplen con estas reglas al 100%, peo no todas las distros asi que puede ser que unos comandos no tengan funcionalidad que deberian.
+
+## Para un proximo avance quisiera hacer un markdown para el uso de git
