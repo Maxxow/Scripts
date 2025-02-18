@@ -73,3 +73,6 @@ echo "Descuento IMSS: $descuento_imss"
 echo "Cuota sindical: $cuota_sindical"
 echo "Total de deducciones: $total_deducciones"
 echo "Total neto a pagar: $total_neto_pagar"
+
+# Este es un codigo de un examen que me dejaron en la materia de Taller de SO en el cuarto semestre, fue a puro scriptbash y la vdd me gusta mucho el uso de la
+# terminal
