@@ -1,10 +1,12 @@
 #!/bin/bash
 echo "hola desde bashscripting"
-echo "este es el comando ls" + $ls
+echo "este es el comando ls:"
+ls
 echo ".▄▄ · ▄▄▄ . ▄▄▄· ▄▄▄· ▄▄▄   ▄▄▄·  ▄▄· ▪         ▐ ▄ 
 ▐█ ▀. ▀▄.▀·▐█ ▄█▐█ ▀█ ▀▄ █·▐█ ▀█ ▐█ ▌▪██ ▪     •█▌▐█
 ▄▀▀▀█▄▐▀▀▪▄ ██▀·▄█▀▀█ ▐▀▀▄ ▄█▀▀█ ██ ▄▄▐█· ▄█▀▄ ▐█▐▐▌
 ▐█▄▪▐█▐█▄▄▌▐█▪·•▐█ ▪▐▌▐█•█▌▐█ ▪▐▌▐███▌▐█▌▐█▌.▐▌██▐█▌
  ▀▀▀▀  ▀▀▀ .▀    ▀  ▀ .▀  ▀ ▀  ▀ ·▀▀▀ ▀▀▀ ▀█▄▀▪▀▀ █▪
 "
-echo "este es el comando pwd" + $pwd
+echo "este es el comando pwd:"
+pwd
