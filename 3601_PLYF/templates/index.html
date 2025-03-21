@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolver Puzle</title>
+    <style>
+        #video-fondo { /*! Checked*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+body { /*! Checked*/
+    color: #f8f8ff;
+    font-family: Old car;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+h1{ /*! Checked*/
+    color: #fff;
+    margin: 20px;
+    padding: 20px;
+    background: transparent;
+    text-align: center;
+}
+form{ /*! Checked*/
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    height: 310px;
+    width: 300px;
+    margin: auto;
+    padding: 150px;
+    background: transparent;
+    box-shadow: 9px 12px 12px;
+    backdrop-filter: blur(5px);
+}
+label { /*! Checked*/
+    font-size: 19px;
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+}
+select { /*! Checked*/
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.bot{ /*! Checked*/
+    width: 150px;
+    height: 50px;
+    background-color: transparent;
+    color: #fff;
+    font-weight: bold;
+    border-width: 2px;
+    border-color: #333;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.bot:hover { /*! Checked*/
+    transform: translateY(-10px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.bot::after{ /*! Checked*/
+    transform: translateY(0);
+}
+resultado { /*! Checked*/
+    text-align: center;
+    margin: auto;
+    height: 150%;
+    width: 300px;
+    backdrop-filter: blur(7px);
+    margin-top: 20px;
+    padding: 50px;
+    border: 1px dashed #333;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.Ins{ /*! Checked*/
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: #ccc;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+.resultado {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .resultado span {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #ddd;
+            border: 1px solid #ddd;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .resultado span:nth-child(even) {
+            background-color: #333;
+        }
+
+        .resultado span:nth-child(odd) {
+            background-color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <center><h2>SOLUTIONS</h2></center>
+        <label for="estado_inicial">Estado Inicial (ej: 4,2,3,1):</label>
+        <input class="Ins" type="text" id="estado_inicial" placeholder="Ingrese los valores separados por coma">
+        
+        <label for="estado_final">Estado Final (ej: 1,2,3,4):</label>
+        <input class="Ins" type="text" id="estado_final" placeholder="Ingrese los valores separados por coma">
+        
+        <center><button class="bot" onclick="resolver('lifo')">Resolver con LIFO</button></center>
+        <center><button class="bot" onclick="resolver('fifo')">Resolver con FIFO</button></center>
+        <center><button class="bot" onclick="resolver('recursivo')">Resolver Recursivamente</button></center>
+        
+        <center><h3>SOLUTION:</h3></center>
+        <div id="resultado" class="resultado"></div>
+    </div>
+
+    <script>
+        function resolver(metodo) {
+            let estadoInicial = document.getElementById("estado_inicial").value.split(",").map(Number);
+            let estadoFinal = document.getElementById("estado_final").value.split(",").map(Number);
+            
+            fetch(`/resolver/${metodo}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ estado_inicial: estadoInicial, solucion: estadoFinal })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let resultado = document.getElementById("resultado");
+                resultado.innerHTML = '';  // Limpiar resultados previos
+
+                // Mostrar cada paso de la solución en un formato horizontal
+                data.solucion.forEach(item => {
+                    let span = document.createElement('span');
+                    span.textContent = item;
+                    resultado.appendChild(span);
+                });
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

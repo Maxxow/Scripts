@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troncomovil</title>
+    <link rel="stylesheet" href="css/Troncomovil.css">
+</head>
+<body>
+    <video autoplay muted loop id="video-fondo">
+        <source src="Media/nsx.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+    </video>
+
+    <h1>Agencia Troncomovil</h1>
+    <form id="car-form">
+        <label for="marca">Marca del Automóvil:</label>
+        <input class="Ins" type="text" id="marca" required><br>
+
+        <label for="costo">Costo de Compra:</label>
+        <input class="Ins" type="number" id="costo" required><br>
+
+        <label for="comprador">Nombre del Comprador:</label>
+        <input class="Ins" type="text" id="comprador" required><br>
+        <label for="origen">Origen del Automóvil:</label>
+        <select id="origen" required>
+            <option value="Germany">Alemania</option>
+            <option value="Japan">Japon</option>
+            <option value="Italy">Italia</option>
+            <option value="USA">USA</option>
+        </select><br>
+
+        <center><button class="bot" id="botT" type="button" onclick="calcularPrecio()">Ticket</button></center>
+        <br>
+        <center><button class="bot" id="botC" type="reset">Cancelar</button></center>
+    </form>
+    
+    <div id="resultado"></div>
+
+    <script src="js/Troncomovil.js"></script>
+</body>
+</html>

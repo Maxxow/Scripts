@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolver Puzle</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+            background-color: #fff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .resultado {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .resultado span {
+            background-color: #f1f1f1;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #333;
+            border: 1px solid #ddd;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .resultado span:nth-child(even) {
+            background-color: #e2f7e2;
+        }
+
+        .resultado span:nth-child(odd) {
+            background-color: #e2f0f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resolver Puzle</h2>
+        <label for="estado_inicial">Estado Inicial (ej: 4,2,3,1):</label>
+        <input type="text" id="estado_inicial" placeholder="Ingrese los valores separados por coma">
+        
+        <label for="estado_final">Estado Final (ej: 1,2,3,4):</label>
+        <input type="text" id="estado_final" placeholder="Ingrese los valores separados por coma">
+        
+        <button onclick="resolver('lifo')">Resolver con LIFO</button>
+        <button onclick="resolver('fifo')">Resolver con FIFO</button>
+        <button onclick="resolver('recursivo')">Resolver Recursivamente</button>
+        
+        <h3>Solución:</h3>
+        <div id="resultado" class="resultado"></div>
+    </div>
+
+    <script>
+        function resolver(metodo) {
+            let estadoInicial = document.getElementById("estado_inicial").value.split(",").map(Number);
+            let estadoFinal = document.getElementById("estado_final").value.split(",").map(Number);
+            
+            fetch(`/resolver/${metodo}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ estado_inicial: estadoInicial, solucion: estadoFinal })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let resultado = document.getElementById("resultado");
+                resultado.innerHTML = '';  // Limpiar resultados previos
+
+                // Mostrar cada paso de la solución en un formato horizontal
+                data.solucion.forEach(item => {
+                    let span = document.createElement('span');
+                    span.textContent = item;
+                    resultado.appendChild(span);
+                });
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
